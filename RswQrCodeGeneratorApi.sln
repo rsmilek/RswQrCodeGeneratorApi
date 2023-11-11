@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RswQrCodeGeneratorApi", "RswQrCodeGeneratorApi\RswQrCodeGeneratorApi.csproj", "{BBC49F35-1BC5-4B9F-9E30-6EA46ED2F7F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RswQrCodeGeneratorApi", "RswQrCodeGeneratorApi\RswQrCodeGeneratorApi.csproj", "{BBC49F35-1BC5-4B9F-9E30-6EA46ED2F7F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
