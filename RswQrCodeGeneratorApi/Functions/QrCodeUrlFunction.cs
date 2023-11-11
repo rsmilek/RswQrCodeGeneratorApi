@@ -57,7 +57,7 @@ namespace RswQrCodeGeneratorApi.Functions
                 BitDepth = PngBitDepth.Bit1,
                 ColorType = PngColorType.Grayscale
             });
-            memoryStream.Position = 0;
+            memoryStream.Position = 0; // THIS IS THE MAGIC !!!
             return new FileStreamResult(memoryStream, "image/png");
 
             //var fullFileName = @$"{context.FunctionAppDirectory}\___QrCodeImageTmp.jpg";
