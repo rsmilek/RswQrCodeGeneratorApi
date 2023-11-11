@@ -24,63 +24,17 @@ namespace RswQrCodeGeneratorApi.Functions
             _logger = log;
         }
 
-
-        [FunctionName("QrCodeUrlFunction")]
-        [OpenApiOperation(operationId: "Run", tags: new[] { "url" })]
+        [FunctionName("QrCodeUrl")]
+        [OpenApiOperation(operationId: "QrCodeUrl", tags: new[] { "url" })]
         [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
         [OpenApiParameter(name: "url", In = ParameterLocation.Query, Required = true, Type = typeof(string), Description = "The **Url** parameter")]
-        //[OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(string), Description = "The OK response")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "image/jpeg", bodyType: typeof(byte[]), Description = "The OK response")]
-        //public async Task<IActionResult> Run(
-        //    [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req)
-        public IActionResult Run(
+        public IActionResult QrCodeUrl(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req)
         {
-            _logger.LogInformation("C# HTTP trigger function processed a request.");
-
-            //string url = req.Query["url"];
-
-            //string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            //dynamic data = JsonConvert.DeserializeObject(requestBody);
-            //url = url ?? data?.url;
-
-            //string responseMessage = string.IsNullOrEmpty(url)
-            //    ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
-            //    : $"Hello, {url}. This HTTP triggered function executed successfully.";
-
-            //return new OkObjectResult(responseMessage);
-
-
-            //return File(System.IO.File.ReadAllBytes(@$"Images\{imageFileName}"), "image/jpeg");
-
-
             var fs = File.OpenRead(@$"C:\Projects\JavaScript\OpenHabApi\OpenHabApi\Images\R_Right.jpg");
             return new FileStreamResult(fs, "image/jpeg");
         }
-
-
-        //[FunctionName("QrCodeUrlFunction")]
-        //[OpenApiOperation(operationId: "Run", tags: new[] { "name" })]
-        //[OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
-        //[OpenApiParameter(name: "name", In = ParameterLocation.Query, Required = true, Type = typeof(string), Description = "The **Name** parameter")]
-        //[OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(string), Description = "The OK response")]
-        //public async Task<IActionResult> Run(
-        //    [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req)
-        //{
-        //    _logger.LogInformation("C# HTTP trigger function processed a request.");
-
-        //    string name = req.Query["name"];
-
-        //    string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-        //    dynamic data = JsonConvert.DeserializeObject(requestBody);
-        //    name = name ?? data?.name;
-
-        //    string responseMessage = string.IsNullOrEmpty(name)
-        //        ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
-        //        : $"Hello, {name}. This HTTP triggered function executed successfully.";
-
-        //    return new OkObjectResult(responseMessage);
-        //}
     }
 }
 
