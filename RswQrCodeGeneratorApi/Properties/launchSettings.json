@@ -1,3 +1,4 @@
+// OpenApi: http://localhost:7069/api/swagger/ui
 {
   "profiles": {
     "RswQrCodeGeneratorApi": {
