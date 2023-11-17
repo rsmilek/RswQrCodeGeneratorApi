@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using QRCoder;
+using RswQrCodeGeneratorApi.QrCode.Extensions;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats;
 using SixLabors.ImageSharp.Formats.Png;
@@ -38,24 +39,17 @@ namespace RswQrCodeGeneratorApi.Functions
         public IActionResult QrCodeUrl(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ExecutionContext context)
         {
-            var qrCodeGenerator = new PayloadGenerator.Url("https://github.com/codebude/QRCoder/");
-            string payload = qrCodeGenerator.ToString();
+            var paylodGenerator = new PayloadGenerator.Url("https://github.com/codebude/QRCoder/");
+            string payload = paylodGenerator.ToString();
 
-            QRCodeGenerator qrGenerator = new QRCodeGenerator();
-            QRCodeData qrCodeData = qrGenerator.CreateQrCode(payload, QRCodeGenerator.ECCLevel.Q);
-            QRCode qrCode = new QRCode(qrCodeData);
-            var qrCodeAsBitmap = qrCode.GetGraphic(10);
-
-            var memoryStream = new MemoryStream();
-            qrCodeAsBitmap.SaveAsPng(memoryStream, new PngEncoder()
-            {
-                BitDepth = PngBitDepth.Bit1,
-                ColorType = PngColorType.Grayscale
-            });
-            memoryStream.Position = 0; // THIS IS THE MAGIC !!! 
-            return new FileStreamResult(memoryStream, "image/png");
+            using (var qrGenerator = new QRCodeGenerator())
+                using (var qrCodeData = qrGenerator.CreateQrCode(payload, QRCodeGenerator.ECCLevel.Q))
+                    using (var qrCode = new QRCode(qrCodeData))
+                    {
+                        var qrCodeAsBitmap = qrCode.GetGraphic(10);
+                        return new FileStreamResult(qrCodeAsBitmap.SaveAsPngToStream(), "image/png");
+                    }
         }
-
     }
 }
 
