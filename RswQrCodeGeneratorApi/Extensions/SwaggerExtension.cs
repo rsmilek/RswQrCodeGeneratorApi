@@ -7,9 +7,9 @@ using System;
 
 namespace RswQrCodeGeneratorApi.Extensions
 {
-    public static class SwaggerExtension
+    internal static class SwaggerExtension
     {
-        public static void AddSwagger(this IServiceCollection services)
+        internal static void AddSwagger(this IServiceCollection services)
         {
             const string ApiGithubUrl = "https://github.com/rsmilek/RswQrCodeGeneratorApi";
             const string ApiUrl = "https://RswQrCodeGeneratorApi.Azure.com";
