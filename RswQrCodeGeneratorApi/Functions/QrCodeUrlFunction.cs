@@ -6,7 +6,6 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using Newtonsoft.Json;
 using QRCoder;
 using RswQrCodeGeneratorApi.QrCode.Extensions;
 using System;
@@ -31,9 +30,9 @@ namespace RswQrCodeGeneratorApi.Functions
         public IActionResult QrCodeUrl(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ExecutionContext context)
         {
-            var stream = new PayloadGenerator.Url("https://github.com/codebude/QRCoder/")
-                .GenerateQrCode()
-                .SaveAsPngToStream();
+            string url = req.Query["url"];
+
+            var stream = new PayloadGenerator.Url(url).GenerateQrCode().SaveAsPngToStream();
 
             return new FileStreamResult(stream, "image/png");
         }
