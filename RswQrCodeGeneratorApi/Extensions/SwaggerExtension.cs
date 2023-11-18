@@ -12,7 +12,7 @@ namespace RswQrCodeGeneratorApi.Extensions
         internal static void AddSwagger(this IServiceCollection services)
         {
             const string ApiGithubUrl = "https://github.com/rsmilek/RswQrCodeGeneratorApi";
-            const string ApiUrl = "https://RswQrCodeGeneratorApi.Azure.com";
+            const string ApiUrl = "https://RswQrCodeGeneratorApi.azurewebsites.com";
 
             services.AddSingleton<IOpenApiConfigurationOptions>(_ =>
             {
