@@ -30,11 +30,19 @@ namespace RswQrCodeGeneratorApi.Functions
         public IActionResult QrCodeUrl(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ExecutionContext context)
         {
-            string url = req.Query["url"];
+            try
+            {
+                string url = req.Query["url"];
 
-            var stream = new PayloadGenerator.Url(url).GenerateQrCode().SaveAsPngToStream();
+                var stream = new PayloadGenerator.Url(url).GenerateQrCode().SaveAsPngToStream();
 
-            return new FileStreamResult(stream, "image/png");
+                return new FileStreamResult(stream, "image/png");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Unhandled Exception log", null);
+                throw;
+            }
         }
     }
 }
