@@ -36,7 +36,7 @@ namespace RswQrCodeGeneratorApi.Functions
         {
             string url = req.Query["url"];
             if (url == null)
-                return new BadRequestObjectResult("Please pass capacity and hours in the request body");
+                return new BadRequestObjectResult($"Please pass url as query parameter! fg. api/{nameof(QrCodeUrl)}?url=www.ibm.com");
 
             var stream = new PayloadGenerator.Url(url).GenerateQrCode().SaveAsPngToStream();
 
@@ -56,13 +56,12 @@ namespace RswQrCodeGeneratorApi.Functions
             var body = await new StreamReader(req.Body).ReadToEndAsync();
             var urlDTO = JsonConvert.DeserializeObject<UrlDTO>(body);
             if (urlDTO == null)
-                return new BadRequestObjectResult($"Please pass {nameof(UrlDTO)} in the request body");
+                return new BadRequestObjectResult($"Please pass {nameof(UrlDTO)} in the request body!");
 
             var stream = new PayloadGenerator.Url(urlDTO.Url).GenerateQrCode().SaveAsPngToStream();
 
             return new FileStreamResult(stream, "image/png");
         }
-
     }
 }
 
