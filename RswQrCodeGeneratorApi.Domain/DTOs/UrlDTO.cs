@@ -1,7 +1,7 @@
 ﻿using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using System;
 
-namespace RswQrCodeGeneratorApi.Domain.DTO
+namespace RswQrCodeGeneratorApi.Domain.DTOs
 {
     public class UrlDTO
     {

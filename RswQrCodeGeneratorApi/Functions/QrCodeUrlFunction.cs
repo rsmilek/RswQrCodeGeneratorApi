@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using QRCoder;
-using RswQrCodeGeneratorApi.Domain.DTO;
+using RswQrCodeGeneratorApi.Domain.DTOs;
 using RswQrCodeGeneratorApi.QrCode.Extensions;
 using System;
 using System.IO;
@@ -43,6 +43,7 @@ namespace RswQrCodeGeneratorApi.Functions
             return new FileStreamResult(stream, "image/png");
         }
 
+        /// <summary>http://localhost:7069/api/swagger/ui#/default/QrCodeUrlAsync</summary>
         [FunctionName(nameof(QrCodeUrlAsync))]
         [OpenApiOperation(operationId: nameof(QrCodeUrlAsync))]
         //[OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]

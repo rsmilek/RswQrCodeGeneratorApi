@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RswQrCodeGeneratorApi", "Rs
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RswQrCodeGeneratorApi.QrCode", "RswQrCodeGeneratorApi.QrCode\RswQrCodeGeneratorApi.QrCode.csproj", "{9D9EC098-21C5-45CB-875C-2D090AB2DDCD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RswQrCodeGeneratorApi.Domain", "RswQrCodeGeneratorApi.Domain\RswQrCodeGeneratorApi.Domain.csproj", "{D18BC81E-1970-48B3-ABE9-D42742A8C02E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RswQrCodeGeneratorApi.Domain", "RswQrCodeGeneratorApi.Domain\RswQrCodeGeneratorApi.Domain.csproj", "{D18BC81E-1970-48B3-ABE9-D42742A8C02E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
