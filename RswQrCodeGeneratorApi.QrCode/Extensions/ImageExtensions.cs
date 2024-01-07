@@ -6,7 +6,7 @@ namespace RswQrCodeGeneratorApi.QrCode.Extensions
 {
     public static class ImageExtensions
     {
-        public static MemoryStream SaveAsPngToStream(this Image image, PngEncoder pngEncoder = null)
+        public static MemoryStream SaveAsPngToStream(this Image image, PngEncoder? pngEncoder = null)
         {
             var memoryStream = new MemoryStream();
             var encoder = pngEncoder ?? new PngEncoder()

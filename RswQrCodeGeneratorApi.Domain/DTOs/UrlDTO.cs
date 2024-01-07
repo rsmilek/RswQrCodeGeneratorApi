@@ -5,7 +5,7 @@ namespace RswQrCodeGeneratorApi.Domain.DTOs
 {
     public class UrlDTO
     {
-        [OpenApiProperty(Nullable = true, Default = "https://github.com/JPlenert/QRCoder-ImageSharp", Description = "The URL text value")]
-        public string Url { get; set; }
+        [OpenApiProperty(Nullable = false, Default = "https://github.com/JPlenert/QRCoder-ImageSharp", Description = "The URL text value")]
+        public string? Url { get; set; }
     }
 }
