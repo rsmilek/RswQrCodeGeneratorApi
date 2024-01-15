@@ -13,6 +13,5 @@ namespace RswQrCodeGeneratorApi.Domain.DTOs
 
         [OpenApiProperty(Nullable = true, Default = "Message", Description = "Enter Email message")]
         public string? Message { get; set; }
-
     }
 }
