@@ -3,8 +3,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using Microsoft.Extensions.Logging;
@@ -40,7 +39,7 @@ namespace RswQrCodeGeneratorApi.Functions
         //[OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(string),
         //    Description = "The OK response message containing a JSON result.")]
 
-        [FunctionName("TurbineRepair")]
+        [Function("TurbineRepair")]
         [OpenApiOperation(operationId: "Run")]
         [OpenApiRequestBody("application/json", typeof(RequestBodyModel),
             Description = "JSON request body containing { hours, capacity}")]

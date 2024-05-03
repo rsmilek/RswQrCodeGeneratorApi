@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using Microsoft.Extensions.Logging;
@@ -26,7 +25,7 @@ namespace RswQrCodeGeneratorApi.Functions
             _logger = log ?? throw new ArgumentNullException();
         }
 
-        [FunctionName(nameof(QrCodeUrl))]
+        [Function(nameof(QrCodeUrl))]
         [OpenApiOperation(operationId: nameof(QrCodeUrl), tags: new[] { "url" })]
         [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
         [OpenApiParameter(name: "url", In = ParameterLocation.Query, Required = true, Type = typeof(string), Description = "The **Url** parameter")]
@@ -44,7 +43,7 @@ namespace RswQrCodeGeneratorApi.Functions
         }
 
         /// <summary>http://localhost:7069/api/swagger/ui#/default/QrCodeUrlAsync</summary>
-        [FunctionName(nameof(QrCodeUrlAsync))]
+        [Function(nameof(QrCodeUrlAsync))]
         [OpenApiOperation(operationId: nameof(QrCodeUrlAsync))]
         //[OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
         [OpenApiRequestBody("application/json", typeof(UrlDTO),

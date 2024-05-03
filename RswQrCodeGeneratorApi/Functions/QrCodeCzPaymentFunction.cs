@@ -3,8 +3,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using Microsoft.Extensions.Logging;
@@ -27,7 +26,7 @@ namespace RswQrCodeGeneratorApi.Functions
         }
 
         /// <summary>http://localhost:7069/api/swagger/ui#/default/QrCodeCzPaymentAsync</summary>
-        [FunctionName(nameof(QrCodeCzPaymentAsync))]
+        [Function(nameof(QrCodeCzPaymentAsync))]
         [OpenApiOperation(operationId: nameof(QrCodeCzPaymentAsync))]
         //[OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
         [OpenApiRequestBody("application/json", typeof(CzPaymentDTO),
