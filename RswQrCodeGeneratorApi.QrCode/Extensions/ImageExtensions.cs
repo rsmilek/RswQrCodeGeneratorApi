@@ -15,7 +15,7 @@ namespace RswQrCodeGeneratorApi.QrCode.Extensions
                 ColorType = PngColorType.Grayscale
             };
             image.SaveAsPng(memoryStream, encoder);
-            memoryStream.Position = 0; // THIS IS THE MAGIC !!! Needed for proper stream futher...
+            memoryStream.Position = 0; // THIS IS THE MAGIC !!! Needed for proper stream further...
 
             return memoryStream;
         }

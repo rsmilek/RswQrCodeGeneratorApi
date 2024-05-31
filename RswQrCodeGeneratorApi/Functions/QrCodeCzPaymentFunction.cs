@@ -34,9 +34,9 @@ namespace RswQrCodeGeneratorApi.Functions
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "image/png", bodyType: typeof(byte[]),
             Description = "The OK response containing a image/png result.")]
         public async Task<IActionResult> QrCodeCzPaymentAsync(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "POST", Route = null)] HttpRequest req, ExecutionContext context)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "POST", Route = null)] HttpRequest request, ExecutionContext context)
         {
-            var body = await new StreamReader(req.Body).ReadToEndAsync();
+            var body = await new StreamReader(request.Body).ReadToEndAsync();
             var czPaymentDTO = JsonConvert.DeserializeObject<CzPaymentDTO>(body);
             if (czPaymentDTO == null)
                 return new BadRequestObjectResult($"Please pass {nameof(CzPaymentDTO)} in the request body!");

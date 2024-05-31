@@ -8,7 +8,7 @@ namespace RswQrCodeGeneratorApi.Domain.DTOs
         [OpenApiProperty(Nullable = true, Default = "", Description = "Enter bank account's prefix")]
         public string? Prefix { get; set; }
 
-        [OpenApiProperty(Nullable = false, Default = "001234567890", Description = "Enter bank accout's number")]
+        [OpenApiProperty(Nullable = false, Default = "001234567890", Description = "Enter bank account's number")]
         public string? Account { get; set; }
 
         [OpenApiProperty(Nullable = false, Default = "3030", Description = "Enter bank account's bank code")]

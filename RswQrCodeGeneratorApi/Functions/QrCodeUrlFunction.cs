@@ -31,11 +31,11 @@ namespace RswQrCodeGeneratorApi.Functions
         [OpenApiParameter(name: "url", In = ParameterLocation.Query, Required = true, Type = typeof(string), Description = "The **Url** parameter")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "image/png", bodyType: typeof(byte[]), Description = "The OK response")]
         public IActionResult QrCodeUrl(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req, ExecutionContext context)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest request, ExecutionContext context)
         {
-            string url = req.Query["url"];
+            string url = request.Query["url"];
             if (url == null)
-                return new BadRequestObjectResult($"Please pass url as query parameter! fg. api/{nameof(QrCodeUrl)}?url=www.ibm.com");
+                return new BadRequestObjectResult($"Please pass url as query parameter! e.g. api/{nameof(QrCodeUrl)}?url=www.ibm.com");
 
             var stream = new PayloadGenerator.Url(url).GenerateQrCode().SaveAsPngToStream();
 
@@ -51,9 +51,9 @@ namespace RswQrCodeGeneratorApi.Functions
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "image/png", bodyType: typeof(byte[]),
             Description = "The OK response containing a image/png result.")]
         public async Task<IActionResult> QrCodeUrlAsync(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "POST", Route = null)] HttpRequest req, ExecutionContext context)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "POST", Route = null)] HttpRequest request, ExecutionContext context)
         {
-            var body = await new StreamReader(req.Body).ReadToEndAsync();
+            var body = await new StreamReader(request.Body).ReadToEndAsync();
             var urlDTO = JsonConvert.DeserializeObject<UrlDTO>(body);
             if (urlDTO == null)
                 return new BadRequestObjectResult($"Please pass {nameof(UrlDTO)} in the request body!");

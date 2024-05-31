@@ -34,9 +34,9 @@ namespace RswQrCodeGeneratorApi.Functions
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "image/png", bodyType: typeof(byte[]),
             Description = "The OK response containing a image/png result.")]
         public async Task<IActionResult> QrCodeEmailAsync(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "POST", Route = null)] HttpRequest req, ExecutionContext context)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "POST", Route = null)] HttpRequest request, ExecutionContext context)
         {
-            var body = await new StreamReader(req.Body).ReadToEndAsync();
+            var body = await new StreamReader(request.Body).ReadToEndAsync();
             var emailDTO = JsonConvert.DeserializeObject<EmailDTO>(body);
             if (emailDTO == null)
                 return new BadRequestObjectResult($"Please pass {nameof(UrlDTO)} in the request body!");
