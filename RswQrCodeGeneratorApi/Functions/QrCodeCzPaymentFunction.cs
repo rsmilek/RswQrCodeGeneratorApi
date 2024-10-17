@@ -1,18 +1,14 @@
-using System.IO;
-using System.Net;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
-using QRCoder;
 using RswQrCodeGeneratorApi.Domain.DTOs;
 using RswQrCodeGeneratorApi.Domain.Payloads;
 using RswQrCodeGeneratorApi.QrCode.Extensions;
+using System.Net;
 
 namespace RswQrCodeGeneratorApi.Functions
 {

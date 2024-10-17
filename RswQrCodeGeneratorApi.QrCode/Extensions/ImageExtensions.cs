@@ -1,5 +1,4 @@
-﻿using System;
-using SixLabors.ImageSharp;
+﻿using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Png;
 
 namespace RswQrCodeGeneratorApi.QrCode.Extensions

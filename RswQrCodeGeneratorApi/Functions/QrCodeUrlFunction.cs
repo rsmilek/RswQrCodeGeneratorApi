@@ -9,10 +9,7 @@ using Newtonsoft.Json;
 using QRCoder;
 using RswQrCodeGeneratorApi.Domain.DTOs;
 using RswQrCodeGeneratorApi.QrCode.Extensions;
-using System;
-using System.IO;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace RswQrCodeGeneratorApi.Functions
 {
@@ -26,14 +23,14 @@ namespace RswQrCodeGeneratorApi.Functions
         }
 
         [Function(nameof(QrCodeUrl))]
-        [OpenApiOperation(operationId: nameof(QrCodeUrl), tags: new[] { "url" })]
+        [OpenApiOperation(operationId: nameof(QrCodeUrl), tags: ["url"])]
         [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
         [OpenApiParameter(name: "url", In = ParameterLocation.Query, Required = true, Type = typeof(string), Description = "The **Url** parameter")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "image/png", bodyType: typeof(byte[]), Description = "The OK response")]
         public IActionResult QrCodeUrl(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest request, ExecutionContext context)
         {
-            string url = request.Query["url"];
+            string? url = request.Query["url"];
             if (url == null)
                 return new BadRequestObjectResult($"Please pass url as query parameter! e.g. api/{nameof(QrCodeUrl)}?url=www.ibm.com");
 
@@ -58,7 +55,9 @@ namespace RswQrCodeGeneratorApi.Functions
             if (urlDTO == null)
                 return new BadRequestObjectResult($"Please pass {nameof(UrlDTO)} in the request body!");
 
-            var stream = new PayloadGenerator.Url(urlDTO.Url).GenerateQrCode().SaveAsPngToStream();
+            var stream = new PayloadGenerator.Url(urlDTO.Url)
+                .GenerateQrCode()
+                .SaveAsPngToStream();
 
             return new FileStreamResult(stream, "image/png");
         }

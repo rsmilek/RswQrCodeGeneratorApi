@@ -1,14 +1,11 @@
-using System.IO;
-using System.Net;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace RswQrCodeGeneratorApi.Functions
 {
@@ -51,7 +48,7 @@ namespace RswQrCodeGeneratorApi.Functions
         {
             // Get request body data.
             string requestBody = await new StreamReader(request.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
+            dynamic? data = JsonConvert.DeserializeObject(requestBody);
             int? capacity = data?.capacity;
             int? hours = data?.hours;
 

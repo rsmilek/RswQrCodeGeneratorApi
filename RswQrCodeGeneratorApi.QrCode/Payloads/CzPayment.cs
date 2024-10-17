@@ -1,5 +1,4 @@
 ﻿using QRCoder;
-using System;
 using System.Numerics;
 
 namespace RswQrCodeGeneratorApi.Domain.Payloads
@@ -8,14 +7,14 @@ namespace RswQrCodeGeneratorApi.Domain.Payloads
     {
         private const string Br = "*";
 
-        private string _prefix;
+        private string? _prefix;
         private string _account;
         private string _bank;
         private string _amount;
-        private string _variableSymbol;
-        private string _specificSymbol;
-        private string _constantSymbol;
-        private string _message;
+        private string? _variableSymbol;
+        private string? _specificSymbol;
+        private string? _constantSymbol;
+        private string? _message;
 
         private readonly Dictionary<char, string> CountryCharToNr = new Dictionary<char, string>()
         {
@@ -23,8 +22,8 @@ namespace RswQrCodeGeneratorApi.Domain.Payloads
             {'Z', "35"}
         };
 
-        public CzPayment(string prefix, string account, string bank, string amount,
-            string variableSymbol, string specificSymbol, string constantSymbol, string message)
+        public CzPayment(string? prefix, string account, string bank, string amount,
+            string? variableSymbol, string? specificSymbol, string? constantSymbol, string? message)
         {
             _prefix = prefix;
             _account = account;
@@ -71,13 +70,13 @@ namespace RswQrCodeGeneratorApi.Domain.Payloads
             return result;
         }
 
-        private (string checkDigit, string bban) CalcCzIBANCheckDigit(string prefix, string accout, string bank)
+        private (string checkDigit, string bban) CalcCzIBANCheckDigit(string? prefix, string accout, string bank)
         {
-            prefix = prefix.PadLeft(6, '0');
-            accout = accout.PadLeft(10, '0');
-            bank = bank.PadLeft(4, '0');
+            string aPrefix = (string.IsNullOrEmpty(prefix) ? string.Empty : prefix).PadLeft(6, '0');
+            string aAccout = accout.PadLeft(10, '0');
+            string aBank = bank.PadLeft(4, '0');
 
-            var bban = $"{bank}{prefix}{accout}";
+            var bban = $"{aBank}{aPrefix}{aAccout}";
             var ibanChangeover = $"{bban}{CountryCharToNr['C']}{CountryCharToNr['Z']}00";
 
             // Calculate modulo 97

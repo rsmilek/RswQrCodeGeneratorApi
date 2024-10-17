@@ -2,17 +2,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using QRCoder;
 using RswQrCodeGeneratorApi.Domain.DTOs;
 using RswQrCodeGeneratorApi.QrCode.Extensions;
-using System;
-using System.IO;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace RswQrCodeGeneratorApi.Functions
 {
@@ -41,7 +37,9 @@ namespace RswQrCodeGeneratorApi.Functions
             if (emailDTO == null)
                 return new BadRequestObjectResult($"Please pass {nameof(UrlDTO)} in the request body!");
 
-            var stream = new PayloadGenerator.Mail(emailDTO.Email, emailDTO.Subject, emailDTO.Message).GenerateQrCode().SaveAsPngToStream();
+            var stream = new PayloadGenerator.Mail(emailDTO.Email, emailDTO.Subject, emailDTO.Message)
+                .GenerateQrCode()
+                .SaveAsPngToStream();
 
             return new FileStreamResult(stream, "image/png");
         }

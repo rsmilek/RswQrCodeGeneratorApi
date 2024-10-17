@@ -1,6 +1,4 @@
 ﻿using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
-using System;
-
 namespace RswQrCodeGeneratorApi.Domain.DTOs
 {
     public class CzPaymentDTO
@@ -8,14 +6,14 @@ namespace RswQrCodeGeneratorApi.Domain.DTOs
         [OpenApiProperty(Nullable = true, Default = "", Description = "Enter bank account's prefix")]
         public string? Prefix { get; set; }
 
-        [OpenApiProperty(Nullable = false, Default = "001234567890", Description = "Enter bank account's number")]
-        public string? Account { get; set; }
+        [OpenApiProperty(Nullable = false, Default = "1599211019", Description = "Enter bank account's number")]
+        public string Account { get; set; } = null!;
 
         [OpenApiProperty(Nullable = false, Default = "3030", Description = "Enter bank account's bank code")]
-        public string? Bank { get; set; }
+        public string Bank { get; set; } = null!;
 
         [OpenApiProperty(Nullable = false, Default = "1.00", Description = "Enter amount")]
-        public string? Amount { get; set; }
+        public string Amount { get; set; } = null!;
 
         [OpenApiProperty(Nullable = true, Default = "", Description = "Enter variable symbol")]
         public string? VariableSymbol { get; set; }
